@@ -31,3 +31,7 @@ def convert_excel_to_csv(excel_file, csv_file=None):
     if csv_file is None:
         csv_file = Path(excel_file).with_suffix(".csv")
     df.write_csv(csv_file)
+
+def condition_accuracy(df):
+    m = df.group_by("condition").agg(pl.col("correct").mean()).sort("condition")
+    return m
